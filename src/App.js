@@ -43,14 +43,6 @@ function App() {
         if (authUser) {
           console.log(authUser)
           setUser(authUser)
-
-          if (authUser.displayName) {
-
-          } else {
-            return authUser.updateProfile({
-              displayName: username
-            })
-          }
         } else {
           setUser(null)
         }
@@ -75,6 +67,11 @@ function App() {
     event.preventDefault()
     auth
     .createUserWithEmailAndPassword(email, password)
+    .then((authUser) => {
+      return authUser.user.updateProfile({
+        displayName: username
+      })
+    })
     .catch((error) => alert(error.message))
   }
 
@@ -111,7 +108,7 @@ function App() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}>
                   </Input>
-                  <Button type="submit" onClick={signUp}>Sign Up</Button>
+                    <Button type="submit" onClick={signUp}>Sign Up</Button>
             </form>
           </div>
         </Modal>
@@ -123,7 +120,12 @@ function App() {
         </img>
       </div>
 
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      {user ? (
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ): (
+        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      )}
+
       <h1>Testing</h1>
       {
         posts.map(({id, post}) => (
