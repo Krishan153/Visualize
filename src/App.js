@@ -74,7 +74,7 @@ function App() {
       })
     })
     .catch((error) => alert(error.message))
-    .setOpen(false)
+    setOpen(false)
   }
 
   const signIn = (event) => {
@@ -82,7 +82,7 @@ function App() {
     auth
     .signInWithEmailAndPassword(email, password)
     .catch((error) => alert(error.message))
-    .setOpenSignIn(false)
+    setOpenSignIn(false)
   }
 
   return (
