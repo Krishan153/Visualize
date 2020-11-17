@@ -87,6 +87,8 @@ function App() {
 
   return (
     <div className="App">
+
+      
       <Modal
         open={open}
         onClose={() => setOpen(false)}>
