@@ -5,6 +5,7 @@ import { db, auth } from './firebase'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core'
+import ImageUpload from './Imageupload'
 
 function getModalStyle() {
   const top = 50;
@@ -88,7 +89,11 @@ function App() {
   return (
     <div className="App">
 
-      
+      {user?.displayName ? (
+        <ImageUpload username={user?.displayName}></ImageUpload>
+      ): (
+        <h3>Make an account to upload! It's free and I won't steal your data!</h3>
+      )}
       <Modal
         open={open}
         onClose={() => setOpen(false)}>
@@ -174,7 +179,7 @@ function App() {
       <h1>Testing</h1>
       {
         posts.map(({id, post}) => (
-          <Post key={id} username={post.username} caption={post.caption} imgUrl={post.imgUrl}></Post>
+          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>
         ))
       }
     </div>
