@@ -88,12 +88,6 @@ function App() {
 
   return (
     <div className="App">
-
-      {user?.displayName ? (
-        <ImageUpload username={user?.displayName}></ImageUpload>
-      ): (
-        <h3>Make an account to upload! It's free and I won't steal your data!</h3>
-      )}
       <Modal
         open={open}
         onClose={() => setOpen(false)}>
@@ -165,23 +159,27 @@ function App() {
           src="https://i.imgur.com/RwK7pg1.png"
           alt="">
         </img>
+          {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+          ): (
+          <div className="app_loginContainer">
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          </div>
+        )}
       </div>
-
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ): (
-        <div className="app_loginContainer">
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-        </div>
-      )}
-
-      <h1>Testing</h1>
+      <div className="app_posts">
       {
         posts.map(({id, post}) => (
           <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>
         ))
       }
+      </div>
+      {user?.displayName ? (
+        <ImageUpload username={user?.displayName}></ImageUpload>
+      ): (
+        <h3>Make an account to upload! It's free and I won't steal your data!</h3>
+      )}
     </div>
   );
 }
