@@ -152,26 +152,25 @@ function App() {
             </form>
           </div>
         </Modal>
-
-      <div className="app_header">
-        <img
-          className="app_headerImage"
-          src="https://i.imgur.com/RwK7pg1.png"
-          alt="">
-        </img>
-          {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-          ): (
-          <div className="app_loginContainer">
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          <div className="app_header">
+          <img
+            className="app_headerImage"
+            src="https://i.imgur.com/RwK7pg1.png"
+            alt="">
+          </img>
+            {user ? (
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+            ): (
+            <div className="app_loginContainer">
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            </div>
+          )}
           </div>
-        )}
-      </div>
       <div className="app_posts">
       {
         posts.map(({id, post}) => (
-          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>
+          <Post key={id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl}></Post>
         ))
       }
       </div>
